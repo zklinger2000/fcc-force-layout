@@ -16,23 +16,6 @@ function buildForceLayout() {
       var svg = d3.select(".graph");
       var chartLayer = svg.append("g").classed("chartLayer", true);
 
-      main()
-
-      function main() {
-        // var range = 100
-        // var data = {
-        //   nodes: d3.range(0, range).map(function (d) {
-        //     return {label: "l" + d, r: ~~d3.randomUniform(8, 28)()}
-        //   }),
-        //   links: d3.range(0, range).map(function () {
-        //     return {source: ~~d3.randomUniform(range)(), target: ~~d3.randomUniform(range)()}
-        //   })
-        // }
-
-        setSize(data);
-        drawChart(data);
-      }
-
       function setSize(data) {
         width = document.querySelector(".graph").clientWidth;
         height = document.querySelector(".graph").clientHeight;
@@ -62,7 +45,7 @@ function buildForceLayout() {
           .force("y", d3.forceY(0))
           .force("x", d3.forceX(0));
 
-        var link = svg.append("g")
+        var link = chartLayer.append("g")
           .attr("class", "links")
           .selectAll("line")
           .data(data.links)
@@ -70,7 +53,7 @@ function buildForceLayout() {
           .append("line")
           .attr("stroke", "black");
 
-        var node = svg.append("g")
+        var node = chartLayer.append("g")
           .attr("class", "nodes")
           .selectAll("circle")
           .data(data.nodes)
@@ -80,7 +63,6 @@ function buildForceLayout() {
             .on("start", dragstarted)
             .on("drag", dragged)
             .on("end", dragended));
-
 
         var ticked = function () {
           link
@@ -113,7 +95,6 @@ function buildForceLayout() {
         simulation.force("link")
           .links(data.links);
 
-
         function dragstarted(d) {
           if (!d3.event.active) simulation.alphaTarget(0.3).restart();
           d.fx = d.x;
@@ -130,7 +111,11 @@ function buildForceLayout() {
           d.fx = null;
           d.fy = null;
         }
-      }
+      }// END: drawChart()
+
+      setSize(data);
+      drawChart(data);
+
     });
 }
 
@@ -151,7 +136,7 @@ class Chart extends Component {
   render() {
     return (
       <div className="force-layout-graph">
-        <svg className="graph" width={640} height={480}></svg>
+        <svg className="graph" width={640} height={640}></svg>
       </div>
     );
   }
