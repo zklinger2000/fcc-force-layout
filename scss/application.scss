@@ -1,0 +1,28 @@
+$black      : #111;
+$white      : #eee;
+$dark-grey  : #424242;
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: rgba($dark-grey, 0.2);
+  width: 100%;
+}
+.force-layout-graph {
+  max-width: 1024px;
+  margin: 0 auto;
+  text-align: center;
+}
+.graph {
+  background-color: $white;
+}
+div.tooltip {
+  position: absolute;
+  text-align: center;
+  padding: 10px;
+  font: 14px sans-serif;
+  background: lightsteelblue;
+  border: 0;
+  border-radius: 8px;
+  pointer-events: none;
+}
