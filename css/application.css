@@ -30,7 +30,14 @@ div.tooltip {
   position: absolute;
   width: 32px;
   height: 32px;
-  background: url("../assets/flags.png") no-repeat; }
+  background-color: red;
+  background: url("https://s3-us-west-2.amazonaws.com/zklinger-photobucket/portfolio/flags.png") no-repeat; }
+  .flag.active {
+    -webkit-transform: scale(2, 2);
+    -moz-transform: scale(2, 2);
+    -ms-transform: scale(2, 2);
+    -o-transform: scale(2, 2);
+    transform: scale(2, 2); }
 
 .flag.flag-gw {
   background-position: -192px -160px center; }

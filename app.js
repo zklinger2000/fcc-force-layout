@@ -54,7 +54,13 @@ function buildForceLayout() {
         var node = forceLayout.selectAll('.node')
           .data(data.nodes)
           .enter().append('div')
-          .attr('class', function(d) { return 'flag flag-' + d.code; });
+          .attr('class', function(d) { return 'flag flag-' + d.code; })
+          .on("mouseover", function(d) {
+            d3.select(this).attr('class', function(d) { return 'flag flag-' + d.code + ' active'; })
+          })
+          .on("mouseout", function(d) {
+            d3.select(this).attr('class', function(d) { return 'flag flag-' + d.code; })
+          });
 
         var tick = function () {
           link
