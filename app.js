@@ -16,6 +16,9 @@ function buildForceLayout() {
       var forceLayout = d3.select('.force-layout-graph');
       var svg = d3.select(".graph");
       var chartLayer = svg.append("g").classed("chartLayer", true);
+      var tooltip = forceLayout.append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 0);
 
       function setSize(data) {
         width = document.querySelector(".graph").clientWidth;
@@ -57,9 +60,18 @@ function buildForceLayout() {
           .attr('class', function(d) { return 'flag flag-' + d.code; })
           .on("mouseover", function(d) {
             d3.select(this).attr('class', function(d) { return 'flag flag-' + d.code + ' active'; })
+            tooltip.transition()
+              .duration(200)
+              .style('opacity', .9);
+            tooltip.html('<h2>' + d.country + '</h2>')
+              .style('left', ((window.innerWidth - width) / 2 + 20) + 'px')
+              .style('top', '20px');
           })
           .on("mouseout", function(d) {
-            d3.select(this).attr('class', function(d) { return 'flag flag-' + d.code; })
+            d3.select(this).attr('class', function(d) { return 'flag flag-' + d.code; });
+            tooltip.transition()
+              .duration(500)
+              .style('opacity', 0);
           });
 
         var tick = function () {
